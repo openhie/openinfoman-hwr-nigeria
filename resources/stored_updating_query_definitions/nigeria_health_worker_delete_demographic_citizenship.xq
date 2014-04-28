@@ -14,7 +14,7 @@ let $providers := if (exists($careServicesRequest/id/@oid)) then csd:filter_by_p
 return
   if ( count($providers) = 1 )
     then
-    let $birth := ($providers[1]/demographic/extension[@oid=$csd_nhwrn:rootoid and @type='birth'])
-    return if (exists($birth)) then (delete node $birth) else ()
+    let $citizenship := ($providers[1]/demographic/extension[@oid=$csd_nhwrn:rootoid and @type='citizenship'])
+    return if (exists($citizenship)) then (delete node $citizenship) else ()
   else  ()
 else ()      

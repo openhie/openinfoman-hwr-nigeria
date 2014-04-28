@@ -49,5 +49,5 @@ return
      csd_blu:bump_timestamp($provs[1]),
      csd_blu:wrap_updating_providers($return)
     )
-  else 	csd_blu:wrap_updating_providers((<die/>,$updBirth,<a/>,$existBirth,<b/>,$provs))
+  else 	csd_blu:wrap_updating_providers(())
 
