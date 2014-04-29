@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svs:ValueSet xmlns:svs="urn:ihe:iti:svs:2008" id="2.25.157947202849059375867107665357870616448.4" displayName="Identification Type" version="1"><svs:ConceptList xml:lang="en-US"><svs:Concept displayName="PIN Number" code="2" codeSystem="ihris-qualify-NMCN"/><svs:Concept displayName="Registration Number" code="1" codeSystem="ihris-qualify-NMCN"/></svs:ConceptList></svs:ValueSet>
