@@ -11,15 +11,13 @@ declare variable $careServicesRequest as item() external;
    and limit paramaters as sent by the Service Finder
 :)   
 let $ext := $careServicesRequest/demographic/extension[@type='photograph' and @oid=$csd_nhwrn:rootoid]
-let $provs0 := if (exists($careServicesRequest/id/@oid)) then	csd:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
-let $provs1 := if (count($provs0) = 1) then $provs0 else ()
-let $provs2 := if (exists($ext))  then $provs1 else ()
+let $provs := if (exists($careServicesRequest/id/@oid)) then	csd:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
 return  
-  if ( count($provs2) = 1 )
+  if ( exists($ext) and count($provs) = 1 )
     then
-    let $provider:= $provs2[1]
+    let $provider:= $provs[1]
     let $position := count($provider/demographic/extension[@type='photograph' and @oid=$csd_nhwrn:rootoid]) +1
-    let $provs3:=  
+    let $return:=  
     <provider oid="{$provider/@oid}">
       <demographic>
 	<extension type='photograph' oid='{$csd_nhwrn:rootoid}' position="{$position}"/>
@@ -31,7 +29,7 @@ return
 	  then insert node $ext into $provider/demographic 
 	else
 	  insert node <demographic>{$ext}</demographic> into $provider
-	  ,   csd_blu:wrap_updating_providers($provs3)
+	  ,   csd_blu:wrap_updating_providers($return)
 	)
-  else  csd_blu:wrap_updating_providers((<a/>,$ext,$provs0))
+  else  csd_blu:wrap_updating_providers(())
       
