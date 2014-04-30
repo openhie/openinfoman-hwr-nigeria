@@ -10,37 +10,20 @@ declare variable $careServicesRequest as item() external;
    and limit paramaters as sent by the Service Finder
 :)   
 
-let $provs0 := if (exists($careServicesRequest/id/@oid)) then	csd:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
-let $provs1 := if (count($provs0) = 1) then $provs0 else ()
-let $provs2 := if (exists($careServicesRequest/otherID/@code))  then $provs1 else ()
+let $provider := if (exists($careServicesRequest/id/@oid)) then	csd:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id)[1] else ()
+let $new_id := $careServicesRequest/otherID
 return  
-  if ( count($provs2) = 1 )
+  if ( exists($provider) and not($new_id/@code = ''))     
     then
-    let $provider:= $provs2[1]
     let $position := count($provider/otherID) +1
-    let $id :=       <otherID code="{$careServicesRequest/otherID/@code}">{string($careServicesRequest/otherID)}</otherID>
-    let $id1 :=
-
-      <otherID code="{$careServicesRequest/otherID/@code}" assigningAuthorityName="{$careServicesRequest/otherID/@assigningAuthorityName}">{string($careServicesRequest/otherID)}</otherID>
-    else 
-      <otherID code="{$careServicesRequest/otherID/@code}">{string($careServicesRequest/otherID)}</otherID>
-    let $provs3:=  
-    <provider oid="{$provider/@oid}">
-      <otherID position="{$position}"/>
-    </provider>
+    let $return:=  
+      <provider oid="{$provider/@oid}">
+	<otherID position="{$position}"/>
+      </provider>
     return 
       (
-	if (exists($careServicesRequest/otherID/@assigningAuthorityName)) then 
-	  insert node attribute {'assigningAuthorityName'} $careServicesRequest/otherID/@assigningAuthorityName into $id   
-	else (),
-	if (exists($careServicesRequest/otherID/@issueDate)) then 
-	  insert node attribute {'issueDate'} $careServicesRequest/otherID/@issueDate into $id   
-	else (),
-	if (exists($careServicesRequest/otherID/@expirationDate)) then 
-	  insert node attribute {'expirationDate'} $careServicesRequest/otherID/@expirationDate into $id   
-	else (),
-	insert node $id into $provider ,    
-	csd_blu:wrap_updating_providers($provs3)
+	insert node $new_id into $provider ,    
+	csd_blu:wrap_updating_providers($return)
       )
   else  csd_blu:wrap_updating_providers(())
       
