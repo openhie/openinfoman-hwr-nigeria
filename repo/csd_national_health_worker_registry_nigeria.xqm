@@ -4,9 +4,8 @@
 : @see https://github.com/his-interop/openinfoman @see http://ihe.net
 :
 :)
-module namespace csd_nhwrn = "http://www.health.gov.ng";
+module namespace csd_nhwrn = "http://www.health.gov.ng/csd";
 
-import module namespace csd = "urn:ihe:iti:csd:2013" at "csd_base_library.xqm";
 declare default element  namespace   "urn:ihe:iti:csd:2013";
 
 

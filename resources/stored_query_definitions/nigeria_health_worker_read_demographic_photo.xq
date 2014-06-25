@@ -1,6 +1,6 @@
-import module namespace csd = "urn:ihe:iti:csd:2013" at "../repo/csd_base_library.xqm";
+import module namespace csd_bl = "https://github.com/his-interop/openinfoman/csd_bl";
 declare default element  namespace   "urn:ihe:iti:csd:2013";
-import module namespace csd_nhwrn = "http://www.health.gov.ng" at "../repo/csd_national_health_worker_registry_nigeria.xqm";
+import module namespace csd_nhwrn = "http://www.health.gov.ng/csd";
 declare variable $careServicesRequest as item() external;
 
 (: 
@@ -12,7 +12,7 @@ declare variable $careServicesRequest as item() external;
 
 let $exts := $careServicesRequest/demographic/extension[@type='photograph' and @oid=$csd_nhwrn:rootoid]
 let $provs0 := if (count($exts) = 1 and exists($exts[1]/@position)) then /CSD/providerDirectory/*  else ()
-let $provs1 := if (exists($careServicesRequest/id/@oid)) then csd:filter_by_primary_id($provs0,$careServicesRequest/id) else ()
+let $provs1 := if (exists($careServicesRequest/id/@oid)) then csd_bl:filter_by_primary_id($provs0,$careServicesRequest/id) else ()
 let $provs2 := 
   if (count($provs1) = 1) 
     then 
@@ -29,4 +29,4 @@ let $provs2 :=
     </provider>
   else ()    
     
-return csd:wrap_providers($provs2)
+return csd_bl:wrap_providers($provs2)

@@ -1,5 +1,5 @@
-import module namespace csd = "urn:ihe:iti:csd:2013" at "../repo/csd_base_library.xqm";
-import module namespace csd_blu = "https://github.com/his-interop/openinfoman/csd_blu" at "../repo/csd_base_library_updating.xqm";
+import module namespace csd_bl = "https://github.com/his-interop/openinfoman/csd_bl";
+import module namespace csd_blu = "https://github.com/his-interop/openinfoman/csd_blu";
 declare default element  namespace   "urn:ihe:iti:csd:2013";
 declare variable $careServicesRequest as item() external;
 
@@ -10,7 +10,7 @@ declare variable $careServicesRequest as item() external;
    and limit paramaters as sent by the Service Finder
 :)   
 
-let $provider := if (exists($careServicesRequest/id/@oid)) then	csd:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id)[1] else ()
+let $provider := if (exists($careServicesRequest/id/@oid)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id)[1] else ()
 let $new_id := $careServicesRequest/otherID
 return  
   if ( exists($provider) and not($new_id/@code = ''))     

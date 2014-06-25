@@ -1,6 +1,6 @@
-import module namespace csd = "urn:ihe:iti:csd:2013" at "../repo/csd_base_library.xqm";
-import module namespace csd_blu = "https://github.com/his-interop/openinfoman/csd_blu" at "../repo/csd_base_library_updating.xqm";
-import module namespace csd_nhwrn = "http://www.health.gov.ng" at "../repo/csd_national_health_worker_registry_nigeria.xqm";
+import module namespace csd_bl = "https://github.com/his-interop/openinfoman/csd_bl";
+import module namespace csd_blu = "https://github.com/his-interop/openinfoman/csd_blu";
+import module namespace csd_nhwrn = "http://www.health.gov.ng/csd";
 declare default element  namespace   "urn:ihe:iti:csd:2013";
 declare variable $careServicesRequest as item() external;
 
@@ -12,7 +12,7 @@ declare variable $careServicesRequest as item() external;
 :)   
 let $new_ext := $careServicesRequest/demographic/extension[@type='photograph' and @oid=$csd_nhwrn:rootoid]
 let $provs0 := if (exists($new_ext/@position)) then /CSD/providerDirectory/*  else ()
-let $provs1 := if (exists($careServicesRequest/id/@oid)) then csd:filter_by_primary_id($provs0,$careServicesRequest/id) else ()
+let $provs1 := if (exists($careServicesRequest/id/@oid)) then csd_bl:filter_by_primary_id($provs0,$careServicesRequest/id) else ()
 let $ext := ($provs1[1]/demographic/extension[@type='photograph' and @oid=$csd_nhwrn:rootoid])[position() = $new_ext/@position]
 return
   if (count($provs1) = 1 and exists($ext)) 
