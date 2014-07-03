@@ -1,7 +1,7 @@
 (:~
 : This is a module contatining  stored queries for a Care Services Discovery compliant Health Worker Registry for Nigeria
 : @version 1.0
-: @see https://github.com/his-interop/openinfoman @see http://ihe.net
+: @see https://github.com/openhie/openinfoman @see http://ihe.net
 :
 :)
 module namespace csd_nhwrn = "http://www.health.gov.ng/csd";

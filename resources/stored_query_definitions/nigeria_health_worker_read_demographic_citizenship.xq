@@ -1,4 +1,4 @@
-import module namespace csd_bl = "https://github.com/his-interop/openinfoman/csd_bl";
+import module namespace csd_bl = "https://github.com/openhie/openinfoman/csd_bl";
 import module namespace csd_nhwrn = "http://www.health.gov.ng";
 declare default element  namespace   "urn:ihe:iti:csd:2013";
 declare variable $careServicesRequest as item() external;
