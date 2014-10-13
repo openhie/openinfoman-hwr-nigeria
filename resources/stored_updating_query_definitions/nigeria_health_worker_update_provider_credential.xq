@@ -11,7 +11,7 @@ declare variable $careServicesRequest as item() external;
    and limit paramaters as sent by the Service Finder
 :)   
 
-let $provs0 := if (exists($careServicesRequest/id/@oid)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
+let $provs0 := if (exists($careServicesRequest/id/@urn)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
 let $provs1 := if (count($provs0) = 1) then $provs0 else ()
 let $provs2 := if (exists($careServicesRequest/credential/codedType/@code) and exists($careServicesRequest/credential/codedType/@codingScheme) ) then $provs1  else ()
 let $cred_new := $careServicesRequest/credential
@@ -24,7 +24,7 @@ return
     let $cred_old := $creds0[1]/..
     let $provider:= $provs2[1]
     let $provs3 := 
-      <provider oid="{$provider/@oid}">
+      <provider urn="{$provider/@urn}">
 	<credential>
 	  <codedType code="{$code}" codingScheme="{$codingScheme}"/>
 	</credential>
@@ -51,9 +51,9 @@ return
 	  (if (exists($cred_old/credentialRenewalDate)) then (delete node $cred_old/credentialRenewalDate) else (),
 	  insert node $cred_new/credentialRenewalDate into $cred_old)
 	else (),
-	if (exists($cred_new/extension[@oid=$csd_nhwrn:rootoid and @type='photograph']/image)) then
-	  (if (exists($cred_old/extension[@oid=$csd_nhwrn:rootoid and @type='photograph'])) then (delete node $cred_old/extension[@oid=$csd_nhwrn:rootoid and @type='photograph']) else (),
-	  insert node $cred_new/extension[@oid=$csd_nhwrn:rootoid and @type='photograph'] into $cred_old	   )
+	if (exists($cred_new/extension[@urn='urn:who.int:hrh:mds' and @type='photograph']/image)) then
+	  (if (exists($cred_old/extension[@urn='urn:who.int:hrh:mds' and @type='photograph'])) then (delete node $cred_old/extension[@urn='urn:who.int:hrh:mds' and @type='photograph']) else (),
+	  insert node $cred_new/extension[@urn='urn:who.int:hrh:mds' and @type='photograph'] into $cred_old	   )
 	else (),
 
 	csd_blu:wrap_updating_providers($provs3)
