@@ -6,6 +6,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:csd="urn:ihe:iti:csd:2013" 
+  urn="urn:openhie.org:openinfoman-hwr-nigeria:stored-function:read_demographic_birth"
   uuid="975e41e3-e952-4d5c-a238-bdfcfebbfda0">
   <description>nigeria_health_worker_read_demographic_birth</description>
   <definition ><xi:include parse="text" href="nigeria_health_worker_read_demographic_birth.xq"/></definition>  

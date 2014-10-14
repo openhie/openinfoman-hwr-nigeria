@@ -10,6 +10,7 @@
   xmlns:hfp="http://www.w3.org/2001/XMLSchema-hasFacetAndProperty"
   xmlns:os="http://a9.com/-/spec/opensearch/1.1/"
   uuid="092d4f54-25fd-413e-a062-07f095792ac0"
+  urn="urn:openhie.org:openinfoman-hwr-nigeria:stored-function:opensearch_name"
   content-type="text/xml">
   <csd:description>
     Peforms a search request on a provider's common name according to the OpenSearch 1.1 Specification:
