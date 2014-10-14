@@ -7,7 +7,7 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:csd="urn:ihe:iti:csd:2013" 
   urn="urn:openhie.org:openinfoman-hwr-nigeria:stored-function:read_otherid"
-  uuid="8d3f1c3963c13d92a973af73d5bf2d53b772947e">
+  uuid="b1658d4c-f63b-4fa9-87cf-2028a2f6d525">
   <description>nigeria_health_worker_read_otherid</description>
 <definition ><xi:include parse="text" href="nigeria_health_worker_read_otherid.xq"/></definition>
 
