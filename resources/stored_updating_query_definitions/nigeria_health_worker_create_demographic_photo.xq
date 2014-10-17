@@ -11,14 +11,14 @@ declare variable $careServicesRequest as item() external;
    and limit paramaters as sent by the Service Finder
 :)   
 let $ext := $careServicesRequest/demographic/extension[@type='photograph' and urn ='urn:who.int:hrh:mds']
-let $provs := if (exists($careServicesRequest/id/@urn)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
+let $provs := if (exists($careServicesRequest/id/@entityID)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
 return  
   if ( exists($ext) and count($provs) = 1 )
     then
     let $provider:= $provs[1]
     let $position := count($provider/demographic/extension[@type='photograph' and @urn='urn:who.int:hrh:mds']) +1
     let $return:=  
-    <provider urn="{$provider/@urn}">
+    <provider entityID="{$provider/@entityID}">
       <demographic>
 	<extension type='photograph' urn='urn:who.int:hrh:mds' position="{$position}"/>
       </demographic>

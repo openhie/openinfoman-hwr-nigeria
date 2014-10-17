@@ -10,7 +10,7 @@ declare variable $careServicesRequest as item() external;
    and limit paramaters as sent by the Service Finder
 :)   
 
-let $provider := if (exists($careServicesRequest/id/@urn)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id)[1] else ()
+let $provider := if (exists($careServicesRequest/id/@entityID)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id)[1] else ()
 let $cred_request := $careServicesRequest/credential
 let $code:= $cred_request/codedType/@code
 let $codingScheme:= $cred_request/codedType/@codingScheme
@@ -19,7 +19,7 @@ return
   if ( exisert($provider) and count($creds) = 0 and exists($code) and exists($codingScheme))  (:DO NOT ALLOW SAME CRED TWICE :)
     then
     let $return:=  
-      <provider urn="{$provider/@urn}">
+      <provider entityID="{$provider/@entityID}">
 	<credential>
 	  <codedType code="{$code}" codingScheme="{$codingScheme}"/>
 	</credential>

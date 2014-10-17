@@ -11,13 +11,9 @@ declare variable $careServicesRequest as item() external;
    and limit paramaters as sent by the Service Finder
 :)   
 
-let $provs := if (exists($careServicesRequest/id/@urn)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
+let $provs := if (exists($careServicesRequest/id/@entityID)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
 let $updCitizen :=  ($careServicesRequest/demographic/extension[@urn='urn:who.int:hrh:mds' and @type='citizenship'])[1]
 let $existCitizen := ($provs[1]/demographic/extension[@urn='urn:who.int:hrh:mds' and @type='citizenship'])[1]
-let $return := 
-  <provider urn="urn:who.int:hrh:mds">
-    <demographic><extension type='citizenship' urn="urn:who.int:hrh:mds"/></demographic>
-  </provider>
 
 return  
   if ( count($provs) = 1 and exists( $existCitizen ) and exists($updCitizen)) then
@@ -41,7 +37,11 @@ return
        else insert node  $updCitizen/birth into $existCitizen
      else (),
      csd_blu:bump_timestamp($provs[1]),
-     csd_blu:wrap_updating_providers($return)
+     let $return := 
+     <provider entityID="{$provs[1]/@entityID}">
+       <demographic><extension type='citizenship' urn="urn:who.int:hrh:mds"/></demographic>
+     </provider>
+     return csd_blu:wrap_updating_providers($return)
     )
   else 	csd_blu:wrap_updating_providers(())
 

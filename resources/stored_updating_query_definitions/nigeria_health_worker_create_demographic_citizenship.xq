@@ -11,14 +11,14 @@ declare variable $careServicesRequest as item() external;
    and limit paramaters as sent by the Service Finder
 :)   
 
-let $provs := if (exists($careServicesRequest/id/@urn)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
+let $provs := if (exists($careServicesRequest/id/@entityID)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
 let $citizenship :=  ($careServicesRequest/demographic/extension[@urn='urn:who.int:hrh:mds' and @type='citizenship'])[1]
 let $existingCitizenship :=  ($provs[1]/demographic/extension[@urn='urn:who.int:hrh:mds' and @type='citizenship'])[1]
 let $demo := $provs[1]/demographic
 let $insert := 
   if (not(exists($demo))) then <demographic>{$citizenship}</demographic> else $citizenship
     let $return := 
-    <provider urn="urn:who.int:hrh:mds">
+    <provider entityID="{$provs[1]/@entityID}">
       <demographic><extension type="citizenship" urn="urn:who.int:hrh:mds"/></demographic>
     </provider>
 let $insertTo :=
