@@ -6,6 +6,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:csd="urn:ihe:iti:csd:2013" 
+  urn="urn:openhie.org:openinfoman-hwr-nigeria:stored-function:indices_demographic_citizenship"
   uuid="e75c465c-3b14-4568-87ae-3eceb165360e">
   <description>nigeria_health_worker_indices_demogrpahic_citizenship</description>
   <definition ><xi:include parse="text" href="nigeria_health_worker_indices_demographic_citizenship.xq"/></definition>

@@ -1,5 +1,5 @@
 import module namespace csd_bl = "https://github.com/openhie/openinfoman/csd_bl";
-import module namespace csd_nhwrn = "http://www.health.gov.ng/csd";
+
 import module namespace csd_blu = "https://github.com/openhie/openinfoman/csd_blu";
 declare default element  namespace   "urn:ihe:iti:csd:2013";
 declare variable $careServicesRequest as item() external;
@@ -11,13 +11,9 @@ declare variable $careServicesRequest as item() external;
    and limit paramaters as sent by the Service Finder
 :)   
 
-let $provs := if (exists($careServicesRequest/id/@oid)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
-let $updBirth :=  ($careServicesRequest/demographic/extension[@oid=$csd_nhwrn:rootoid and @type='birth'])[1]
-let $existBirth := ($provs[1]/demographic/extension[@oid=$csd_nhwrn:rootoid and @type='birth'])[1]
-let $return := 
-  <provider oid="{$provs[1]/@oid}">
-    <demographic><extension type="birth" oid="{$csd_nhwrn:rootoid}"/></demographic>
-  </provider>
+let $provs := if (exists($careServicesRequest/id/@entityID)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
+let $updBirth :=  ($careServicesRequest/demographic/extension[@urn='urn:who.int:hrh:mds' and @type='birth'])[1]
+let $existBirth := ($provs[1]/demographic/extension[@urn='urn:who.int:hrh:mds' and @type='birth'])[1]
 
 return  
   if ( count($provs) = 1 and exists( $existBirth ) and exists($updBirth)) then
@@ -47,6 +43,10 @@ return
        else insert node  $updBirth/fatherName into $existBirth
      else (),	    
      csd_blu:bump_timestamp($provs[1]),
+     let $return := 
+     <provider entityID="{$provs[1]/@entityID}">
+       <demographic><extension type="birth" urn="urn:who.int:hrh:mds"/></demographic>
+     </provider>
      csd_blu:wrap_updating_providers($return)
     )
   else 	csd_blu:wrap_updating_providers(())

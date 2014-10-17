@@ -6,6 +6,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:csd="urn:ihe:iti:csd:2013" 
+  urn="urn:openhie.org:openinfoman-hwr-nigeria:stored-function:delete_demographic_birth"
   uuid="a1d8741c-2ccf-4d4f-8c9d-7a3cca3e0859">
   <description>nigeria_health_worker_delete_demogrpahic_birth</description>
   <definition ><xi:include parse="text" href="nigeria_health_worker_delete_demographic_birth.xq"/></definition>

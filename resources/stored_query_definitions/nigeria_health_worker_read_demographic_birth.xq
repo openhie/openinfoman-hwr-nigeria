@@ -1,5 +1,5 @@
 import module namespace csd_bl = "https://github.com/openhie/openinfoman/csd_bl";
-import module namespace csd_nhwrn = "http://www.health.gov.ng/csd";
+
 declare default element  namespace   "urn:ihe:iti:csd:2013";
 declare variable $careServicesRequest as item() external;
 
@@ -10,13 +10,13 @@ declare variable $careServicesRequest as item() external;
    and limit paramaters as sent by the Service Finder
 :) 
 
-let $provs1 := if (exists($careServicesRequest/id/@oid)) then csd_bl:filter_by_primary_id(/CSD/providerDirectory/* ,$careServicesRequest/id) else ()
+let $provs1 := if (exists($careServicesRequest/id/@entityID)) then csd_bl:filter_by_primary_id(/CSD/providerDirectory/* ,$careServicesRequest/id) else ()
 let $provs2 := 
   if (count($provs1) = 1) 
     then 
-    <provider oid="{$provs1[1]/@oid}">
+    <provider entityID="{$provs1[1]/@entityID}">
       <demographic>
-	{($provs1[1]/demographic/extension[@oid=$csd_nhwrn:rootoid and @type='birth'])[1]}
+	{($provs1[1]/demographic/extension[@urn='urn:who.int:hrh:mds' and @type='birth'])[1]}
       </demographic>
     </provider>
   else ()        

@@ -6,6 +6,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:csd="urn:ihe:iti:csd:2013" 
+  urn="urn:openhie.org:openinfoman-hwr-nigeria:stored-function:create_other_id"
   uuid="55d92144-45c6-499f-94f6-b58f99761435">
   <description>nigeria_health_worker_create_otherid</description>
 <definition ><xi:include parse="text" href="nigeria_health_worker_create_otherid.xq"/></definition>

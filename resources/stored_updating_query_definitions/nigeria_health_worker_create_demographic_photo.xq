@@ -1,6 +1,6 @@
 import module namespace csd_bl = "https://github.com/openhie/openinfoman/csd_bl";
 import module namespace csd_blu = "https://github.com/openhie/openinfoman/csd_blu";
-import module namespace csd_nhwrn = "http://www.health.gov.ng/csd";
+
 declare default element  namespace   "urn:ihe:iti:csd:2013";
 declare variable $careServicesRequest as item() external;
 
@@ -10,17 +10,17 @@ declare variable $careServicesRequest as item() external;
    The dynamic context of this query has $careServicesRequest set to contain any of the search 
    and limit paramaters as sent by the Service Finder
 :)   
-let $ext := $careServicesRequest/demographic/extension[@type='photograph' and @oid=$csd_nhwrn:rootoid]
-let $provs := if (exists($careServicesRequest/id/@oid)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
+let $ext := $careServicesRequest/demographic/extension[@type='photograph' and urn ='urn:who.int:hrh:mds']
+let $provs := if (exists($careServicesRequest/id/@entityID)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
 return  
   if ( exists($ext) and count($provs) = 1 )
     then
     let $provider:= $provs[1]
-    let $position := count($provider/demographic/extension[@type='photograph' and @oid=$csd_nhwrn:rootoid]) +1
+    let $position := count($provider/demographic/extension[@type='photograph' and @urn='urn:who.int:hrh:mds']) +1
     let $return:=  
-    <provider oid="{$provider/@oid}">
+    <provider entityID="{$provider/@entityID}">
       <demographic>
-	<extension type='photograph' oid='{$csd_nhwrn:rootoid}' position="{$position}"/>
+	<extension type='photograph' urn='urn:who.int:hrh:mds' position="{$position}"/>
       </demographic>
     </provider>
     return 
