@@ -1,3 +1,11 @@
+openinfoman-hwr-nigeria (1.0.1~trusty) trusty; urgency=medium
+
+  * Release Version 1.0.1
+    -2a371b0 updated git ignore
+    --https://github.com/openhie/openinfoman-hwr-nigeria/commmit/2a371b
+
+ -- Carl Leitner <litlfred@ibiblio.org>  Thu, 12 Mar 2015 14:24:30 +0000
+
 openinfoman-hwr-nigeria (1.0.0~trusty) trusty; urgency=low
 
   [Carl Leitner <litlfred@ibiblio.org>]
