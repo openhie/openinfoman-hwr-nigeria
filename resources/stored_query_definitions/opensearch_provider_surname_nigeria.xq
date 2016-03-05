@@ -90,7 +90,7 @@ let $html_wrap_func :=  function($meta,$content) {
 
 
 let $processors := map{
-  'html_wrap' := $html_wrap_func
+  'html_wrap' : $html_wrap_func
 }
 
 (:Produce the feed in the neccesary format :)
