@@ -14,9 +14,9 @@ let $provider := if (exists($careServicesRequest/id/@entityID)) then	csd_bl:filt
 let $cred_request := $careServicesRequest/credential
 let $code:= $cred_request/codedType/@code
 let $codingScheme:= $cred_request/codedType/@codingScheme
-let $creds := $provs2/credential[@code = $code and @codingScheme = $codingScheme]
+let $creds := $provider/credential[@code = $code and @codingScheme = $codingScheme]
 return  
-  if ( exisert($provider) and count($creds) = 0 and exists($code) and exists($codingScheme))  (:DO NOT ALLOW SAME CRED TWICE :)
+  if ( exists($provider) and count($creds) = 0 and exists($code) and exists($codingScheme))  (:DO NOT ALLOW SAME CRED TWICE :)
     then
     let $return:=  
       <provider entityID="{$provider/@entityID}">
