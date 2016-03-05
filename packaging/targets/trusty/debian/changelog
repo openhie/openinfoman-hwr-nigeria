@@ -1,3 +1,11 @@
+openinfoman-hwr-nigeria (1.1.6~trusty) trusty; urgency=medium
+
+  * Release Version 1.1.6
+    -2a5fecd fixed typo
+    --https://github.com/openhie/openinfoman-hwr-nigeria/commmit/2a5fec
+
+ -- Carl Leitner <litlfred@ibiblio.org>  Sat, 05 Mar 2016 10:34:21 +0000
+
 openinfoman-hwr-nigeria (1.1.5~trusty) trusty; urgency=medium
 
   * Release Version 1.1.5
