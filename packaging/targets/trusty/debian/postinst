@@ -1,0 +1,30 @@
+#!/bin/bash
+set -x
+
+
+
+OI=/var/lib/openinfoman
+USERNAME=oi
+BASEX=$OI/bin/basex
+
+
+REPOS=()
+SFS=("stored_query_definitions/nigeria_health_worker_read_otherid.xml" "stored_query_definitions/nigeria_health_worker_read_demographic_birth.xml" "stored_query_definitions/nigeria_health_worker_indices_demographic_photo.xml" "stored_query_definitions/nigeria_health_worker_read_demographic_photo.xml" "stored_query_definitions/nigeria_health_worker_indices_demographic_citizenship.xml" "stored_query_definitions/opensearch_provider_surname_nigeria.xml" "stored_query_definitions/nigeria_health_worker_read_demographic_citizenship.xml" "stored_query_definitions/nigeria_health_worker_indices_demographic_birth.xml" "stored_updating_query_definitions/nigeria_health_worker_delete_demographic_citizenship.xml" "stored_updating_query_definitions/nigeria_health_worker_update_demographic_birth.xml" "stored_updating_query_definitions/nigeria_health_worker_delete_demographic_birth.xml" "stored_updating_query_definitions/nigeria_health_worker_create_demographic_citizenship.xml" "stored_updating_query_definitions/nigeria_health_worker_delete_demographic_photo.xml" "stored_updating_query_definitions/nigeria_health_worker_create_demographic_photo.xml" "stored_updating_query_definitions/nigeria_health_worker_create_provider_credential.xml" "stored_updating_query_definitions/nigeria_health_worker_update_demographic_citizenship.xml" "stored_updating_query_definitions/nigeria_health_worker_update_provider_credential.xml" "stored_updating_query_definitions/nigeria_health_worker_create_demographic_birth.xml" "stored_updating_query_definitions/nigeria_health_worker_update_otherid.xml" "stored_updating_query_definitions/nigeria_health_worker_update_demographic_photo.xml" "stored_updating_query_definitions/nigeria_health_worker_create_otherid.xml")
+
+for REPO in ${REPOS[@]}
+do
+   INST="REPO INSTALL ${OI}/repo-src/${REPO}"
+   $BASEX -Vc "${INST}"
+done
+
+for SF in ${SFS[@]}
+do
+  cd $OI
+  $OI/resources/scripts/install_"stored_function.php $OI/resources/$SF 
+  if [[ $? != 0 ]]; then exit 1; fi
+done
+
+
+chown -R $USERNAME:$USERNAME $OI
+
+

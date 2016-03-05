@@ -9,7 +9,7 @@ Homepage: https://github.com/openhie/openinfoman-hwr-nigeria
 
 Package: openinfoman-hwr-nigeria
 Architecture: all
-Depends: openinfoman (>= 1.0.11), openinfoman-rapidpro
+Depends: openinfoman (>= 1.1), openinfoman-rapidpro
 Recommends: 
 Description: OpenInfoMan Nigeria Stored Functions
  Library of stored functions for OpenInfoMan for Nigeria
