@@ -20,7 +20,7 @@ done
 for SF in ${SFS[@]}
 do
   cd $OI
-  $OI/resources/scripts/install_"stored_function.php $OI/resources/$SF 
+  $OI/resources/scripts/install_stored_function.php $OI/resources/$SF 
   if [[ $? != 0 ]]; then exit 1; fi
 done
 
