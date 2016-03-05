@@ -1,3 +1,11 @@
+openinfoman-hwr-nigeria (1.1.4~trusty) trusty; urgency=medium
+
+  * Release Version 1.1.4
+    -ea3ee41 fixed typo
+    --https://github.com/openhie/openinfoman-hwr-nigeria/commmit/ea3ee4
+
+ -- Carl Leitner <litlfred@ibiblio.org>  Sat, 05 Mar 2016 10:31:44 +0000
+
 openinfoman-hwr-nigeria (1.1.3~trusty) trusty; urgency=medium
 
   * Release Version 1.1.3
