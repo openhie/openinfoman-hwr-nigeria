@@ -17,4 +17,4 @@ return
     let $birth := ($providers[1]/demographic/extension[@urn='urn:who.int:hrh:mds' and @type='birth'])
     return if (exists($birth)) then (delete node $birth) else ()
   else  ()
-else ()      
+
