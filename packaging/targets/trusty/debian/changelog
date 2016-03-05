@@ -1,3 +1,11 @@
+openinfoman-hwr-nigeria (1.1.2~trusty) trusty; urgency=medium
+
+  * Release Version 1.1.2
+    -4799183 updated map syntax
+    --https://github.com/openhie/openinfoman-hwr-nigeria/commmit/479918
+
+ -- Carl Leitner <litlfred@ibiblio.org>  Sat, 05 Mar 2016 10:28:27 +0000
+
 openinfoman-hwr-nigeria (1.1.1~trusty) trusty; urgency=medium
 
   * Release Version 1.1.1
