@@ -47,7 +47,7 @@ return
      <provider entityID="{$provs[1]/@entityID}">
        <demographic><extension type="birth" urn="urn:who.int:hrh:mds"/></demographic>
      </provider>
-     csd_blu:wrap_updating_providers($return)
+     return csd_blu:wrap_updating_providers($return)
     )
   else 	csd_blu:wrap_updating_providers(())
 
