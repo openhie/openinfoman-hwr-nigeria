@@ -10,8 +10,8 @@ declare variable $careServicesRequest as item() external;
    The dynamic context of this query has $careServicesRequest set to contain any of the search 
    and limit paramaters as sent by the Service Finder
 :)   
-let $ext := $careServicesRequest/demographic/extension[@type='photograph' and urn ='urn:who.int:hrh:mds']
-let $provs := if (exists($careServicesRequest/id/@entityID)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) else ()
+let $ext := $careServicesRequest/requestParams/demographic/extension[@type='photograph' and urn ='urn:who.int:hrh:mds']
+let $provs := if (exists($careServicesRequest/requestParams/id/@entityID)) then	csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/requestParams/id) else ()
 return  
   if ( exists($ext) and count($provs) = 1 )
     then

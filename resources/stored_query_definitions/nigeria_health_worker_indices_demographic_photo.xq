@@ -11,7 +11,7 @@ declare variable $careServicesRequest as item() external;
 :) 
   let $provs0 := 
     if (exists($careServicesRequest/id/@entityID)) then 
-      csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/id) 
+      csd_bl:filter_by_primary_id(/CSD/providerDirectory/*,$careServicesRequest/requestParams/id) 
     else (/CSD/providerDirectory/*)
   let $provs1:=     
       for $provider in  $provs0
